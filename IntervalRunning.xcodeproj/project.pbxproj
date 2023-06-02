@@ -7,23 +7,55 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		D03393232A260F8600D23674 /* LoginViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = D03393222A260F8600D23674 /* LoginViewController.swift */; };
+		D03393252A2614BD00D23674 /* ProfileViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = D03393242A2614BD00D23674 /* ProfileViewController.swift */; };
+		D03393272A262A1C00D23674 /* TabBarController.swift in Sources */ = {isa = PBXBuildFile; fileRef = D03393262A262A1C00D23674 /* TabBarController.swift */; };
+		D043A64C2A1BDA0B00C7D6BE /* IntervalRunning.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = D043A64A2A1BDA0B00C7D6BE /* IntervalRunning.xcdatamodeld */; };
 		D06396A12A1B5F410091F2ED /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = D06396A02A1B5F410091F2ED /* AppDelegate.swift */; };
 		D06396A32A1B5F410091F2ED /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = D06396A22A1B5F410091F2ED /* SceneDelegate.swift */; };
-		D06396A52A1B5F410091F2ED /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = D06396A42A1B5F410091F2ED /* ViewController.swift */; };
-		D06396A82A1B5F410091F2ED /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = D06396A62A1B5F410091F2ED /* Main.storyboard */; };
+		D06396A52A1B5F410091F2ED /* RunDetailsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = D06396A42A1B5F410091F2ED /* RunDetailsViewController.swift */; };
 		D06396AA2A1B5F420091F2ED /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = D06396A92A1B5F420091F2ED /* Assets.xcassets */; };
 		D06396AD2A1B5F420091F2ED /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = D06396AB2A1B5F420091F2ED /* LaunchScreen.storyboard */; };
+		D06396B62A1B65300091F2ED /* UIViewController+Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = D06396B52A1B65300091F2ED /* UIViewController+Extension.swift */; };
+		D08DFFAE2A2906E200BDEC0C /* DataManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = D08DFFAD2A2906E200BDEC0C /* DataManager.swift */; };
+		D08DFFB22A29113E00BDEC0C /* Вам необходимо замедлиться.mp3 in Resources */ = {isa = PBXBuildFile; fileRef = D08DFFB02A29113E00BDEC0C /* Вам необходимо замедлиться.mp3 */; };
+		D08DFFB32A29113E00BDEC0C /* Вам необходимо ускориться.mp3 in Resources */ = {isa = PBXBuildFile; fileRef = D08DFFB12A29113E00BDEC0C /* Вам необходимо ускориться.mp3 */; };
+		D0AE0D632A2725400099632E /* UIView+Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = D0AE0D622A2725400099632E /* UIView+Extension.swift */; };
+		D0AE0D652A2729C40099632E /* SettingViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = D0AE0D642A2729C40099632E /* SettingViewController.swift */; };
+		D0B02A062A1E0C900011CD13 /* NewRunViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = D0B02A052A1E0C900011CD13 /* NewRunViewController.swift */; };
+		D0B02A082A1E0CA30011CD13 /* HomeViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = D0B02A072A1E0CA30011CD13 /* HomeViewController.swift */; };
+		D0B02A0A2A1E111E0011CD13 /* UnitExtensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = D0B02A092A1E111E0011CD13 /* UnitExtensions.swift */; };
+		D0B02A0C2A1E4CD40011CD13 /* FormatDisplay.swift in Sources */ = {isa = PBXBuildFile; fileRef = D0B02A0B2A1E4CD40011CD13 /* FormatDisplay.swift */; };
+		D0B02A0F2A1E4F750011CD13 /* LocationManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = D0B02A0E2A1E4F750011CD13 /* LocationManager.swift */; };
+		D0B02A112A1F66F80011CD13 /* CoreDataStack.swift in Sources */ = {isa = PBXBuildFile; fileRef = D0B02A102A1F66F80011CD13 /* CoreDataStack.swift */; };
+		D0B02A132A20A1B10011CD13 /* MulticolorPolyline.swift in Sources */ = {isa = PBXBuildFile; fileRef = D0B02A122A20A1B10011CD13 /* MulticolorPolyline.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		D03393222A260F8600D23674 /* LoginViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoginViewController.swift; sourceTree = "<group>"; };
+		D03393242A2614BD00D23674 /* ProfileViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProfileViewController.swift; sourceTree = "<group>"; };
+		D03393262A262A1C00D23674 /* TabBarController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TabBarController.swift; sourceTree = "<group>"; };
+		D043A64B2A1BDA0B00C7D6BE /* IntervalRunning.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = IntervalRunning.xcdatamodel; sourceTree = "<group>"; };
 		D063969D2A1B5F410091F2ED /* IntervalRunning.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = IntervalRunning.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		D06396A02A1B5F410091F2ED /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		D06396A22A1B5F410091F2ED /* SceneDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SceneDelegate.swift; sourceTree = "<group>"; };
-		D06396A42A1B5F410091F2ED /* ViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewController.swift; sourceTree = "<group>"; };
-		D06396A72A1B5F410091F2ED /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
+		D06396A42A1B5F410091F2ED /* RunDetailsViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RunDetailsViewController.swift; sourceTree = "<group>"; };
 		D06396A92A1B5F420091F2ED /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		D06396AC2A1B5F420091F2ED /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		D06396AE2A1B5F420091F2ED /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		D06396B52A1B65300091F2ED /* UIViewController+Extension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIViewController+Extension.swift"; sourceTree = "<group>"; };
+		D08DFFAD2A2906E200BDEC0C /* DataManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DataManager.swift; sourceTree = "<group>"; };
+		D08DFFB02A29113E00BDEC0C /* Вам необходимо замедлиться.mp3 */ = {isa = PBXFileReference; lastKnownFileType = audio.mp3; path = "Вам необходимо замедлиться.mp3"; sourceTree = "<group>"; };
+		D08DFFB12A29113E00BDEC0C /* Вам необходимо ускориться.mp3 */ = {isa = PBXFileReference; lastKnownFileType = audio.mp3; path = "Вам необходимо ускориться.mp3"; sourceTree = "<group>"; };
+		D0AE0D622A2725400099632E /* UIView+Extension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIView+Extension.swift"; sourceTree = "<group>"; };
+		D0AE0D642A2729C40099632E /* SettingViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SettingViewController.swift; sourceTree = "<group>"; };
+		D0B02A052A1E0C900011CD13 /* NewRunViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NewRunViewController.swift; sourceTree = "<group>"; };
+		D0B02A072A1E0CA30011CD13 /* HomeViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HomeViewController.swift; sourceTree = "<group>"; };
+		D0B02A092A1E111E0011CD13 /* UnitExtensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UnitExtensions.swift; sourceTree = "<group>"; };
+		D0B02A0B2A1E4CD40011CD13 /* FormatDisplay.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FormatDisplay.swift; sourceTree = "<group>"; };
+		D0B02A0E2A1E4F750011CD13 /* LocationManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LocationManager.swift; sourceTree = "<group>"; };
+		D0B02A102A1F66F80011CD13 /* CoreDataStack.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CoreDataStack.swift; sourceTree = "<group>"; };
+		D0B02A122A20A1B10011CD13 /* MulticolorPolyline.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MulticolorPolyline.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -56,15 +88,87 @@
 		D063969F2A1B5F410091F2ED /* IntervalRunning */ = {
 			isa = PBXGroup;
 			children = (
-				D06396A02A1B5F410091F2ED /* AppDelegate.swift */,
-				D06396A22A1B5F410091F2ED /* SceneDelegate.swift */,
-				D06396A42A1B5F410091F2ED /* ViewController.swift */,
-				D06396A62A1B5F410091F2ED /* Main.storyboard */,
-				D06396A92A1B5F420091F2ED /* Assets.xcassets */,
-				D06396AB2A1B5F420091F2ED /* LaunchScreen.storyboard */,
+				D0B02A0D2A1E4F620011CD13 /* Managers */,
+				D06396B92A1B65720091F2ED /* Controllers */,
+				D06396B82A1B656A0091F2ED /* Views */,
+				D06396B72A1B65600091F2ED /* Models */,
+				D06396B42A1B651A0091F2ED /* Extensions */,
+				D06396BA2A1B65870091F2ED /* SupportingFiles */,
 				D06396AE2A1B5F420091F2ED /* Info.plist */,
+				D0B02A102A1F66F80011CD13 /* CoreDataStack.swift */,
+				D0B02A122A20A1B10011CD13 /* MulticolorPolyline.swift */,
 			);
 			path = IntervalRunning;
+			sourceTree = "<group>";
+		};
+		D06396B42A1B651A0091F2ED /* Extensions */ = {
+			isa = PBXGroup;
+			children = (
+				D0B02A092A1E111E0011CD13 /* UnitExtensions.swift */,
+				D06396B52A1B65300091F2ED /* UIViewController+Extension.swift */,
+				D0AE0D622A2725400099632E /* UIView+Extension.swift */,
+			);
+			path = Extensions;
+			sourceTree = "<group>";
+		};
+		D06396B72A1B65600091F2ED /* Models */ = {
+			isa = PBXGroup;
+			children = (
+				D043A64A2A1BDA0B00C7D6BE /* IntervalRunning.xcdatamodeld */,
+			);
+			path = Models;
+			sourceTree = "<group>";
+		};
+		D06396B82A1B656A0091F2ED /* Views */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			path = Views;
+			sourceTree = "<group>";
+		};
+		D06396B92A1B65720091F2ED /* Controllers */ = {
+			isa = PBXGroup;
+			children = (
+				D06396A42A1B5F410091F2ED /* RunDetailsViewController.swift */,
+				D0B02A052A1E0C900011CD13 /* NewRunViewController.swift */,
+				D0B02A072A1E0CA30011CD13 /* HomeViewController.swift */,
+				D03393222A260F8600D23674 /* LoginViewController.swift */,
+				D03393242A2614BD00D23674 /* ProfileViewController.swift */,
+				D03393262A262A1C00D23674 /* TabBarController.swift */,
+				D0AE0D642A2729C40099632E /* SettingViewController.swift */,
+			);
+			path = Controllers;
+			sourceTree = "<group>";
+		};
+		D06396BA2A1B65870091F2ED /* SupportingFiles */ = {
+			isa = PBXGroup;
+			children = (
+				D08DFFAF2A29113100BDEC0C /* Voiceover */,
+				D0B02A0B2A1E4CD40011CD13 /* FormatDisplay.swift */,
+				D06396A02A1B5F410091F2ED /* AppDelegate.swift */,
+				D06396A22A1B5F410091F2ED /* SceneDelegate.swift */,
+				D06396A92A1B5F420091F2ED /* Assets.xcassets */,
+				D06396AB2A1B5F420091F2ED /* LaunchScreen.storyboard */,
+			);
+			path = SupportingFiles;
+			sourceTree = "<group>";
+		};
+		D08DFFAF2A29113100BDEC0C /* Voiceover */ = {
+			isa = PBXGroup;
+			children = (
+				D08DFFB02A29113E00BDEC0C /* Вам необходимо замедлиться.mp3 */,
+				D08DFFB12A29113E00BDEC0C /* Вам необходимо ускориться.mp3 */,
+			);
+			path = Voiceover;
+			sourceTree = "<group>";
+		};
+		D0B02A0D2A1E4F620011CD13 /* Managers */ = {
+			isa = PBXGroup;
+			children = (
+				D0B02A0E2A1E4F750011CD13 /* LocationManager.swift */,
+				D08DFFAD2A2906E200BDEC0C /* DataManager.swift */,
+			);
+			path = Managers;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -126,8 +230,9 @@
 			buildActionMask = 2147483647;
 			files = (
 				D06396AD2A1B5F420091F2ED /* LaunchScreen.storyboard in Resources */,
+				D08DFFB32A29113E00BDEC0C /* Вам необходимо ускориться.mp3 in Resources */,
 				D06396AA2A1B5F420091F2ED /* Assets.xcassets in Resources */,
-				D06396A82A1B5F410091F2ED /* Main.storyboard in Resources */,
+				D08DFFB22A29113E00BDEC0C /* Вам необходимо замедлиться.mp3 in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -138,23 +243,30 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				D06396A52A1B5F410091F2ED /* ViewController.swift in Sources */,
+				D06396B62A1B65300091F2ED /* UIViewController+Extension.swift in Sources */,
+				D0B02A062A1E0C900011CD13 /* NewRunViewController.swift in Sources */,
+				D0AE0D632A2725400099632E /* UIView+Extension.swift in Sources */,
+				D0B02A0F2A1E4F750011CD13 /* LocationManager.swift in Sources */,
+				D03393272A262A1C00D23674 /* TabBarController.swift in Sources */,
+				D0AE0D652A2729C40099632E /* SettingViewController.swift in Sources */,
+				D06396A52A1B5F410091F2ED /* RunDetailsViewController.swift in Sources */,
+				D08DFFAE2A2906E200BDEC0C /* DataManager.swift in Sources */,
+				D03393252A2614BD00D23674 /* ProfileViewController.swift in Sources */,
+				D043A64C2A1BDA0B00C7D6BE /* IntervalRunning.xcdatamodeld in Sources */,
+				D0B02A132A20A1B10011CD13 /* MulticolorPolyline.swift in Sources */,
 				D06396A12A1B5F410091F2ED /* AppDelegate.swift in Sources */,
+				D0B02A112A1F66F80011CD13 /* CoreDataStack.swift in Sources */,
+				D0B02A082A1E0CA30011CD13 /* HomeViewController.swift in Sources */,
+				D0B02A0C2A1E4CD40011CD13 /* FormatDisplay.swift in Sources */,
 				D06396A32A1B5F410091F2ED /* SceneDelegate.swift in Sources */,
+				D03393232A260F8600D23674 /* LoginViewController.swift in Sources */,
+				D0B02A0A2A1E111E0011CD13 /* UnitExtensions.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
 /* End PBXSourcesBuildPhase section */
 
 /* Begin PBXVariantGroup section */
-		D06396A62A1B5F410091F2ED /* Main.storyboard */ = {
-			isa = PBXVariantGroup;
-			children = (
-				D06396A72A1B5F410091F2ED /* Base */,
-			);
-			name = Main.storyboard;
-			sourceTree = "<group>";
-		};
 		D06396AB2A1B5F420091F2ED /* LaunchScreen.storyboard */ = {
 			isa = PBXVariantGroup;
 			children = (
@@ -216,7 +328,7 @@
 				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
 				GCC_WARN_UNUSED_FUNCTION = YES;
 				GCC_WARN_UNUSED_VARIABLE = YES;
-				IPHONEOS_DEPLOYMENT_TARGET = 16.4;
+				IPHONEOS_DEPLOYMENT_TARGET = 15.0;
 				MTL_ENABLE_DEBUG_INFO = INCLUDE_SOURCE;
 				MTL_FAST_MATH = YES;
 				ONLY_ACTIVE_ARCH = YES;
@@ -270,7 +382,7 @@
 				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
 				GCC_WARN_UNUSED_FUNCTION = YES;
 				GCC_WARN_UNUSED_VARIABLE = YES;
-				IPHONEOS_DEPLOYMENT_TARGET = 16.4;
+				IPHONEOS_DEPLOYMENT_TARGET = 15.0;
 				MTL_ENABLE_DEBUG_INFO = NO;
 				MTL_FAST_MATH = YES;
 				SDKROOT = iphoneos;
@@ -290,11 +402,13 @@
 				DEVELOPMENT_TEAM = GHRWK526R5;
 				GENERATE_INFOPLIST_FILE = YES;
 				INFOPLIST_FILE = IntervalRunning/Info.plist;
+				INFOPLIST_KEY_NSLocationAlwaysAndWhenInUseUsageDescription = "IntervalRunning needs access to your location in order to record and track your run!";
+				INFOPLIST_KEY_NSLocationWhenInUseUsageDescription = "IntervalRunning needs access to your location in order to record and track your run!";
 				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
 				INFOPLIST_KEY_UILaunchStoryboardName = LaunchScreen;
-				INFOPLIST_KEY_UIMainStoryboardFile = Main;
 				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPad = "UIInterfaceOrientationPortrait UIInterfaceOrientationPortraitUpsideDown UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
 				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPhone = "UIInterfaceOrientationPortrait UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
+				IPHONEOS_DEPLOYMENT_TARGET = 15.0;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",
@@ -302,9 +416,12 @@
 				MARKETING_VERSION = 1.0;
 				PRODUCT_BUNDLE_IDENTIFIER = DmitryGorbunow.IntervalRunning;
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				SUPPORTED_PLATFORMS = "iphoneos iphonesimulator";
+				SUPPORTS_MACCATALYST = NO;
+				SUPPORTS_MAC_DESIGNED_FOR_IPHONE_IPAD = NO;
 				SWIFT_EMIT_LOC_STRINGS = YES;
 				SWIFT_VERSION = 5.0;
-				TARGETED_DEVICE_FAMILY = "1,2";
+				TARGETED_DEVICE_FAMILY = 1;
 			};
 			name = Debug;
 		};
@@ -318,11 +435,13 @@
 				DEVELOPMENT_TEAM = GHRWK526R5;
 				GENERATE_INFOPLIST_FILE = YES;
 				INFOPLIST_FILE = IntervalRunning/Info.plist;
+				INFOPLIST_KEY_NSLocationAlwaysAndWhenInUseUsageDescription = "IntervalRunning needs access to your location in order to record and track your run!";
+				INFOPLIST_KEY_NSLocationWhenInUseUsageDescription = "IntervalRunning needs access to your location in order to record and track your run!";
 				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
 				INFOPLIST_KEY_UILaunchStoryboardName = LaunchScreen;
-				INFOPLIST_KEY_UIMainStoryboardFile = Main;
 				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPad = "UIInterfaceOrientationPortrait UIInterfaceOrientationPortraitUpsideDown UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
 				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPhone = "UIInterfaceOrientationPortrait UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
+				IPHONEOS_DEPLOYMENT_TARGET = 15.0;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",
@@ -330,9 +449,12 @@
 				MARKETING_VERSION = 1.0;
 				PRODUCT_BUNDLE_IDENTIFIER = DmitryGorbunow.IntervalRunning;
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				SUPPORTED_PLATFORMS = "iphoneos iphonesimulator";
+				SUPPORTS_MACCATALYST = NO;
+				SUPPORTS_MAC_DESIGNED_FOR_IPHONE_IPAD = NO;
 				SWIFT_EMIT_LOC_STRINGS = YES;
 				SWIFT_VERSION = 5.0;
-				TARGETED_DEVICE_FAMILY = "1,2";
+				TARGETED_DEVICE_FAMILY = 1;
 			};
 			name = Release;
 		};
@@ -358,6 +480,19 @@
 			defaultConfigurationName = Release;
 		};
 /* End XCConfigurationList section */
+
+/* Begin XCVersionGroup section */
+		D043A64A2A1BDA0B00C7D6BE /* IntervalRunning.xcdatamodeld */ = {
+			isa = XCVersionGroup;
+			children = (
+				D043A64B2A1BDA0B00C7D6BE /* IntervalRunning.xcdatamodel */,
+			);
+			currentVersion = D043A64B2A1BDA0B00C7D6BE /* IntervalRunning.xcdatamodel */;
+			path = IntervalRunning.xcdatamodeld;
+			sourceTree = "<group>";
+			versionGroupType = wrapper.xcdatamodel;
+		};
+/* End XCVersionGroup section */
 	};
 	rootObject = D06396952A1B5F410091F2ED /* Project object */;
 }
