@@ -26,6 +26,8 @@ class NewRunViewController: UIViewController, DataTransferProtocol {
     
     var player: AVAudioPlayer!
     
+    var distanceArray = [Double]()
+    
     var setPace: Float = 5.0
     
     private lazy var blurView: UIView = {
@@ -82,7 +84,17 @@ class NewRunViewController: UIViewController, DataTransferProtocol {
         label.translatesAutoresizingMaskIntoConstraints = false
         label.textAlignment = .center
         label.font = UIFont.systemFont(ofSize: 100, weight: .heavy)
-        label.text = "0.00"
+        label.text = "0:00"
+        label.textColor = UIColor(named: "dark")
+        return label
+    }()
+    
+    private lazy var currentPaceLabel: UILabel = {
+        let label = UILabel()
+        label.translatesAutoresizingMaskIntoConstraints = false
+        label.textAlignment = .center
+        label.font = UIFont.systemFont(ofSize: 30, weight: .heavy)
+        label.text = "0:00"
         label.textColor = UIColor(named: "dark")
         return label
     }()
@@ -116,14 +128,24 @@ class NewRunViewController: UIViewController, DataTransferProtocol {
     private lazy var stopButton: UIButton = {
         let button = UIButton()
         button.translatesAutoresizingMaskIntoConstraints = false
-        button.addTarget(self, action: #selector(stopTapped), for: .touchUpInside)
+//        button.addTarget(self, action: #selector(stopTapped), for: .touchUpInside)
         let largeConfig = UIImage.SymbolConfiguration(pointSize: 120, weight: .medium, scale: .small)
                
         let largeRun = UIImage(systemName: "stop.circle", withConfiguration: largeConfig)
         button.setImage(largeRun, for: .normal)
         button.tintColor = UIColor(named: "dark")
+        button.isMultipleTouchEnabled = false
         button.setShadow()
+
         button.isHidden = true
+        
+        let tapGestureRecognizer = UITapGestureRecognizer(target: self, action: #selector(stopButtonTapped))
+        button.addGestureRecognizer(tapGestureRecognizer)
+            
+        let longPressRecognizer = UILongPressGestureRecognizer(target: self, action: #selector(stopButtonLongPressed))
+        longPressRecognizer.minimumPressDuration = 1
+        
+        button.addGestureRecognizer(longPressRecognizer)
         
         return button
     }()
@@ -188,6 +210,7 @@ class NewRunViewController: UIViewController, DataTransferProtocol {
         view.addSubview(distanceLabel)
         view.addSubview(distanceMeasurementLabel)
         view.addSubview(settingButton)
+        view.addSubview(currentPaceLabel)
     }
     
     private func setupConstraints() {
@@ -235,7 +258,12 @@ class NewRunViewController: UIViewController, DataTransferProtocol {
             settingButton.centerYAnchor.constraint(equalTo: startButton.centerYAnchor),
             settingButton.centerXAnchor.constraint(equalTo: view.centerXAnchor, constant: (view.frame.width / 4) + 15),
             settingButton.heightAnchor.constraint(equalToConstant: 50),
-            settingButton.widthAnchor.constraint(equalToConstant: 50)
+            settingButton.widthAnchor.constraint(equalToConstant: 50),
+            
+            currentPaceLabel.centerYAnchor.constraint(equalTo: startButton.centerYAnchor),
+            currentPaceLabel.centerXAnchor.constraint(equalTo: view.centerXAnchor, constant: -((view.frame.width / 4) + 15)),
+            currentPaceLabel.heightAnchor.constraint(equalToConstant: 30),
+            currentPaceLabel.widthAnchor.constraint(equalToConstant: 150)
         ])
     }
     
@@ -267,8 +295,60 @@ class NewRunViewController: UIViewController, DataTransferProtocol {
         timeLabel.text = "\(formattedTime)"
         
         if distance.value > 0 {
-            paceLabel.text = String(format: "%.2f", (Double(seconds) / 60) / (distance.value / 1000))
+//            paceLabel.text = String(format: "%.2f", (Double(seconds) / 60) / (distance.value / 1000))
+            
+            
+            let pace = (Double(seconds) / 60) / (distance.value / 1000)
+            
+            var seconds = String(Int(pace.truncatingRemainder(dividingBy: 1) * 60))
+            
+            if seconds.count == 1 {
+                seconds = "0" + seconds
+            }
+            
+            paceLabel.text = "\(Int(pace)):\(seconds)"
+            
+//            print("Дробь \(pace)")
+//            print("Десятичная часть \(pace.truncatingRemainder(dividingBy: 1))")
+//            print("Секунды \(Int(pace.truncatingRemainder(dividingBy: 1) * 60))")
         }
+        
+        if distance.value != 0 {
+
+            if distanceArray.count < 10 {
+                distanceArray.append(distance.value)
+            } else {
+                distanceArray.removeFirst()
+                distanceArray.append(distance.value)
+                
+                let pace = (Double(10) / 60) / (((distanceArray.last ?? 0) - (distanceArray.first ?? 0)) / 1000)
+                
+                var seconds = String(Int(pace.truncatingRemainder(dividingBy: 1) * 60))
+                
+                if seconds.count == 1 {
+                    seconds = "0" + seconds
+                }
+                
+                currentPaceLabel.text = "\(Int(pace)):\(seconds)"
+                
+//                currentPaceLabel.text = String(format: "%.2f", (Double(10) / 60) / (((distanceArray.last ?? 0) - (distanceArray.first ?? 0)) / 1000))
+            }
+        }
+        
+//        print(distanceArray)
+        
+//        print((distanceArray.last ?? 0) - (distanceArray.first ?? 0))
+    
+        
+        
+        
+//        print((Double(10) / 60))
+//        print(((distanceArray.last ?? 0) - (distanceArray.first ?? 0) / 1000))
+//        currentPace.append(distance.value / 1000)
+        
+//        print(seconds, distance.value)
+        
+        
     }
     
     private func startLocationUpdates() {
@@ -305,7 +385,6 @@ class NewRunViewController: UIViewController, DataTransferProtocol {
         startRun()
         startButton.isHidden = true
         stopButton.isHidden = false
-        print(setPace)
         settingButton.isEnabled = false
         
         let url = Bundle.main.url(forResource: "Вам необходимо ускориться", withExtension: "mp3")
@@ -314,7 +393,7 @@ class NewRunViewController: UIViewController, DataTransferProtocol {
           player.play()
     }
     
-    @objc func stopTapped() {
+    @objc func stopTapped(sender: UILongPressGestureRecognizer) {
         self.stopRun()
         self.saveRun()
         startButton.isHidden = false
@@ -331,6 +410,10 @@ class NewRunViewController: UIViewController, DataTransferProtocol {
           player.play()
     }
     
+    @objc func handleTap() {
+        print("1")
+    }
+    
     @objc func settingTapped() {
         let vc = SettingViewController()
         vc.delegate = self
@@ -341,6 +424,44 @@ class NewRunViewController: UIViewController, DataTransferProtocol {
 //            sheet.detents = [.medium()]
 //        }
 //        present(sheetViewController, animated: true)
+    }
+    
+    @objc func stopButtonTapped(sender: UITapGestureRecognizer){
+        print("tapped")
+        
+        UIView.animate(withDuration: 0.2, delay: 0.0, options: UIView.AnimationOptions.curveEaseIn, animations: {
+            
+            // HERE
+            self.stopButton.transform = CGAffineTransform.identity.scaledBy(x: 1.1, y: 1.1) // Scale your image
+            
+        }) { (finished) in
+            UIView.animate(withDuration: 0.2, animations: {
+                
+                self.stopButton.transform = CGAffineTransform.identity // undo in 1 seconds
+                
+            })
+        }
+    }
+
+    @objc func stopButtonLongPressed(sender: UILongPressGestureRecognizer) {
+        if sender.state == .began {
+            self.stopRun()
+            self.saveRun()
+            startButton.isHidden = false
+            stopButton.isHidden = true
+            settingButton.isEnabled = true
+            
+            let vc = RunDetailsViewController()
+            vc.run = run
+            navigationController?.pushViewController(vc, animated: true)
+            
+            let url = Bundle.main.url(forResource: "Вам необходимо замедлиться", withExtension: "mp3")
+            
+            player = try! AVAudioPlayer(contentsOf: url!)
+            player.play()
+        }
+        
+   
     }
 }
 

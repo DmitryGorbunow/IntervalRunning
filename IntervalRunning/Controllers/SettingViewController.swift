@@ -69,7 +69,6 @@ class SettingViewController: UIViewController {
         let pace = DataManager.shared.get(key: "Pace")
         delegate?.pass(data: pace)
         
-        print(pace)
     }
     
     private func setupView() {
@@ -82,7 +81,7 @@ class SettingViewController: UIViewController {
         NSLayoutConstraint.activate([
             typeTrainingPicker.leadingAnchor.constraint(equalTo: view.leadingAnchor, constant: 16),
             typeTrainingPicker.trailingAnchor.constraint(equalTo: view.trailingAnchor, constant: -16),
-            typeTrainingPicker.topAnchor.constraint(equalTo: view.topAnchor, constant: 16),
+            typeTrainingPicker.topAnchor.constraint(equalTo: view.topAnchor, constant: 32),
             typeTrainingPicker.heightAnchor.constraint(equalToConstant: 200),
             
             paceSlider.leadingAnchor.constraint(equalTo: view.leadingAnchor, constant: 32),
