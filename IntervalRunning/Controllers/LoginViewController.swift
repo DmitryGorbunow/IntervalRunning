@@ -43,18 +43,15 @@ class LoginViewController: UIViewController {
         let tabBarVC = UITabBarController()
         
         let vc1 = NewRunViewController()
-        let vc2 = HomeViewController()
-        let vc3 = ProfileViewController()
+        let vc2 = ProfileViewController()
         
         vc1.title = "Бег"
-        vc2.title = "Главная"
-        vc3.title = "Профиль"
+        vc2.title = "Профиль"
         
         vc1.tabBarItem.image = UIImage(systemName: "figure.run")
-        vc2.tabBarItem.image = UIImage(systemName: "house.circle")
-        vc3.tabBarItem.image = UIImage(systemName: "person.crop.circle")
+        vc2.tabBarItem.image = UIImage(systemName: "person.crop.circle")
         
-        tabBarVC.setViewControllers([vc2, vc1, vc3], animated: false)
+        tabBarVC.setViewControllers([vc1, vc2], animated: false)
         tabBarVC.modalPresentationStyle = .fullScreen
         present(tabBarVC, animated: true)
     }

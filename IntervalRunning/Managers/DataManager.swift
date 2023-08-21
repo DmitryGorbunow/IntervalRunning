@@ -12,11 +12,11 @@ class DataManager {
     
     let defaults = UserDefaults.standard
     
-    func get(key: String) -> Float {
-        return defaults.float(forKey: key)
+    func get(key: String) -> Any {
+        return defaults.object(forKey: key) as Any
     }
     
-    func set(key: String, value: Float) {
+    func set(key: String, value: Any) {
         defaults.set(value, forKey: key)
     }
 }
