@@ -11,33 +11,26 @@ class TabBarController: UITabBarController {
 
     override func viewDidLoad() {
         super.viewDidLoad()
-        UITabBar.appearance().tintColor = UIColor(named: "yellow")
+        UITabBar.appearance().tintColor = UIColor(named: "red")
   
        
         viewControllers = [createNewRunVC(), createProfileVC()]
-        self.tabBar.unselectedItemTintColor = UIColor(named: "dark")
+        self.tabBar.unselectedItemTintColor = UIColor.secondaryLabel
       
     }
     
-    private func createHomeVC() -> UINavigationController {
-        let homeVC = HomeViewController()
-        homeVC.title = "Главная"
-        homeVC.tabBarItem.image = UIImage(systemName: "house.circle")
-        return UINavigationController(rootViewController: homeVC)
-    }
-    
-    private func createNewRunVC() -> UINavigationController {
+    private func createNewRunVC() -> UIViewController {
         let newRunVC = NewRunViewController()
         newRunVC.title = "Бег"
         newRunVC.tabBarItem.image = UIImage(systemName: "figure.run")
-        return UINavigationController(rootViewController: newRunVC)
+        return newRunVC
     }
     
-    private func createProfileVC() -> UINavigationController {
+    private func createProfileVC() -> UIViewController {
         let profileVC = ProfileViewController()
         profileVC.title = "Профиль"
         profileVC.tabBarItem.image = UIImage(systemName: "person.crop.circle")
-        return UINavigationController(rootViewController: profileVC)
+        return profileVC
     }
     
   

@@ -2,6 +2,6 @@
 <Workspace
    version = "1.0">
    <FileRef
-      location = "self:/Users/dmitrygorbunow/Desktop/Xcode Projects/IntervalRunning/Interval Running.xcodeproj">
+      location = "self:">
    </FileRef>
 </Workspace>

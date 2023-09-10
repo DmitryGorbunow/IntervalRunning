@@ -15,7 +15,8 @@ class RunDetailsViewController: UIViewController {
     private lazy var distanceLabel: UILabel = {
         let label = UILabel()
         label.textAlignment = .center
-        label.text = "Distance"
+        label.textColor = UIColor(named: "dark")
+        label.font = UIFont.systemFont(ofSize: 20, weight: .regular)
         label.translatesAutoresizingMaskIntoConstraints = false
         return label
     }()
@@ -24,7 +25,8 @@ class RunDetailsViewController: UIViewController {
         let label = UILabel()
         label.translatesAutoresizingMaskIntoConstraints = false
         label.textAlignment = .center
-        label.text = "Time"
+        label.textColor = UIColor(named: "dark")
+        label.font = UIFont.systemFont(ofSize: 20, weight: .regular)
         return label
     }()
     
@@ -32,7 +34,8 @@ class RunDetailsViewController: UIViewController {
         let label = UILabel()
         label.translatesAutoresizingMaskIntoConstraints = false
         label.textAlignment = .center
-        label.text = "Pace"
+        label.textColor = UIColor(named: "dark")
+        label.font = UIFont.systemFont(ofSize: 20, weight: .regular)
         return label
     }()
     
@@ -40,16 +43,31 @@ class RunDetailsViewController: UIViewController {
         let label = UILabel()
         label.translatesAutoresizingMaskIntoConstraints = false
         label.textAlignment = .center
-        label.text = "Date"
+        label.textColor = UIColor(named: "dark")
+        label.font = UIFont.systemFont(ofSize: 30, weight: .heavy)
         return label
     }()
     
     private lazy var mapView: MKMapView = {
         let map = MKMapView()
-        map.showsUserLocation = true
-        map.layer.cornerRadius = 10
+        map.showsUserLocation = false
+        map.tintColor = UIColor(named: "yellow")
+        map.mapType = .mutedStandard
+        map.pointOfInterestFilter = .excludingAll
         map.translatesAutoresizingMaskIntoConstraints = false
         return map
+    }()
+    
+    private lazy var doneButton: UIButton = {
+        let button = UIButton()
+        button.setTitle("Готово", for: .normal)
+        button.backgroundColor = UIColor(named: "yellow")
+        button.layer.cornerRadius = 12
+        button.titleLabel?.font = .systemFont(ofSize: 22, weight: .bold)
+        button.translatesAutoresizingMaskIntoConstraints = false
+        button.addTarget(self, action: #selector(doneButtonTapped), for: .touchUpInside)
+        button.setShadow()
+        return button
     }()
     
     override func viewDidLoad() {
@@ -61,64 +79,78 @@ class RunDetailsViewController: UIViewController {
         mapView.delegate = self
     }
     
-    override func viewWillAppear(_ animated: Bool) {
-        super.viewWillAppear(animated)
-        navigationController?.navigationBar.isHidden = true
-    }
-    
     private func configureView() {
         
-//        let distance = Measurement(value: run.distance, unit: UnitLength.meters)
-//        let seconds = Int(run.duration)
+        
+        let distance = Measurement(value: run.distance, unit: UnitLength.meters)
+        let seconds = Int(run.duration)
 //        let formattedDistance = FormatDisplay.distance(distance)
 //        let formattedDate = FormatDisplay.date(run.timestamp)
-//        let formattedTime = FormatDisplay.time(seconds)
-//        let formattedPace = FormatDisplay.pace(distance: distance,
-//                                               seconds: seconds,
-//                                               outputUnit: UnitSpeed.minutesPerKilometer)
         
-//        distanceLabel.text = "Distance:  \(formattedDistance)"
-//        dateLabel.text = formattedDate
-//        timeLabel.text = "Time:  \(formattedTime)"
-//        paceLabel.text = "Pace:  \(formattedPace)"
+        let date = run.timestamp
+        
+        let dateFormatter = DateFormatter()
+        dateFormatter.dateStyle = .short
+        dateFormatter.timeStyle = .short
+        dateFormatter.locale = Locale(identifier: "ru_RU")
+        
+        let dateString = dateFormatter.string(from: date!)
+        
+        let formattedTime = FormatDisplay.time(seconds)
+        let formattedPace = FormatDisplay.pace(distance: distance,
+                                               seconds: seconds,
+                                               outputUnit: UnitSpeed.minutesPerKilometer)
+        
+        distanceLabel.text = "Дистанция:  \(String(format: "%.2f", run.distance / 1000)) км"
+        dateLabel.text = dateString
+        timeLabel.text = "Время:  \(formattedTime)"
+        paceLabel.text = "Темп:  \(formattedPace) мин/км"
         
         loadMap()
     }
     
     private func setupViews() {
+        view.addSubview(mapView)
         view.addSubview(distanceLabel)
         view.addSubview(timeLabel)
         view.addSubview(paceLabel)
         view.addSubview(dateLabel)
-        view.addSubview(mapView)
+        view.addSubview(doneButton)
+        
     }
     
     private func setupConstraints() {
         NSLayoutConstraint.activate([
-            distanceLabel.topAnchor.constraint(equalTo: view.safeAreaLayoutGuide.topAnchor, constant: 50),
-            distanceLabel.leadingAnchor.constraint(equalTo: view.leadingAnchor, constant: 100),
-            distanceLabel.trailingAnchor.constraint(equalTo: view.trailingAnchor, constant: -100),
-            distanceLabel.heightAnchor.constraint(equalToConstant: 30),
+            
+            dateLabel.topAnchor.constraint(equalTo: view.safeAreaLayoutGuide.topAnchor, constant: 20),
+            dateLabel.leadingAnchor.constraint(equalTo: view.leadingAnchor, constant: 16),
+            dateLabel.trailingAnchor.constraint(equalTo: view.trailingAnchor, constant: -16),
+            dateLabel.heightAnchor.constraint(equalToConstant: 40),
+            
+            distanceLabel.topAnchor.constraint(equalTo: dateLabel.bottomAnchor, constant: 20 ),
+            distanceLabel.leadingAnchor.constraint(equalTo: view.leadingAnchor, constant: 16),
+            distanceLabel.trailingAnchor.constraint(equalTo: view.trailingAnchor, constant: -16),
+            distanceLabel.heightAnchor.constraint(equalToConstant: 20),
             
             timeLabel.topAnchor.constraint(equalTo: distanceLabel.bottomAnchor, constant: 20),
-            timeLabel.leadingAnchor.constraint(equalTo: view.leadingAnchor, constant: 100),
-            timeLabel.trailingAnchor.constraint(equalTo: view.trailingAnchor, constant: -100),
-            timeLabel.heightAnchor.constraint(equalToConstant: 30),
+            timeLabel.leadingAnchor.constraint(equalTo: view.leadingAnchor, constant: 16),
+            timeLabel.trailingAnchor.constraint(equalTo: view.trailingAnchor, constant: -16),
+            timeLabel.heightAnchor.constraint(equalToConstant: 20),
             
             paceLabel.topAnchor.constraint(equalTo: timeLabel.bottomAnchor, constant: 20),
-            paceLabel.leadingAnchor.constraint(equalTo: view.leadingAnchor, constant: 100),
-            paceLabel.trailingAnchor.constraint(equalTo: view.trailingAnchor, constant: -100),
-            paceLabel.heightAnchor.constraint(equalToConstant: 30),
+            paceLabel.leadingAnchor.constraint(equalTo: view.leadingAnchor, constant: 16),
+            paceLabel.trailingAnchor.constraint(equalTo: view.trailingAnchor, constant: -16),
+            paceLabel.heightAnchor.constraint(equalToConstant: 20),
             
-            dateLabel.topAnchor.constraint(equalTo: paceLabel.bottomAnchor, constant: 20),
-            dateLabel.leadingAnchor.constraint(equalTo: view.leadingAnchor, constant: 100),
-            dateLabel.trailingAnchor.constraint(equalTo: view.trailingAnchor, constant: -100),
-            dateLabel.heightAnchor.constraint(equalToConstant: 30),
+            doneButton.topAnchor.constraint(equalTo: paceLabel.bottomAnchor, constant: 40),
+            doneButton.widthAnchor.constraint(equalToConstant: 200),
+            doneButton.heightAnchor.constraint(equalToConstant: 50),
+            doneButton.centerXAnchor.constraint(equalTo: view.centerXAnchor),
             
-            mapView.topAnchor.constraint(equalTo: dateLabel.bottomAnchor, constant: 30),
-            mapView.leadingAnchor.constraint(equalTo: view.leadingAnchor, constant: 25),
-            mapView.trailingAnchor.constraint(equalTo: view.trailingAnchor, constant: -25),
-            mapView.heightAnchor.constraint(equalToConstant: 300)
+            mapView.topAnchor.constraint(equalTo: doneButton.bottomAnchor, constant: 40),
+            mapView.bottomAnchor.constraint(equalTo: view.bottomAnchor),
+            mapView.leadingAnchor.constraint(equalTo: view.leadingAnchor),
+            mapView.trailingAnchor.constraint(equalTo: view.trailingAnchor),
         ])
     }
     
@@ -149,6 +181,25 @@ class RunDetailsViewController: UIViewController {
                                             longitude: (minLong + maxLong) / 2)
         let span = MKCoordinateSpan(latitudeDelta: (maxLat - minLat) * 1.3,
                                     longitudeDelta: (maxLong - minLong) * 1.3)
+        
+        let startPin = MKPointAnnotation()
+        startPin.title = "Старт"
+        startPin.coordinate = CLLocationCoordinate2D(
+            latitude: latitudes.first! ,
+            longitude: longitudes.first!
+        )
+        mapView.addAnnotation(startPin)
+        
+        let endPin = MKPointAnnotation()
+        endPin.title = "Финиш"
+        
+        endPin.coordinate = CLLocationCoordinate2D(
+            latitude: latitudes.last!,
+            longitude: longitudes.last!
+        )
+        mapView.addAnnotation(endPin)
+        
+        
         return MKCoordinateRegion(center: center, span: span)
     }
     
@@ -242,6 +293,10 @@ class RunDetailsViewController: UIViewController {
         
         return UIColor(red: red, green: green, blue: blue, alpha: 1)
     }
+    
+    @objc func doneButtonTapped() {
+        dismiss(animated: true)
+    }
 }
 
 extension RunDetailsViewController: MKMapViewDelegate {
@@ -251,10 +306,22 @@ extension RunDetailsViewController: MKMapViewDelegate {
         }
         let renderer = MKPolylineRenderer(polyline: polyline)
         renderer.strokeColor = polyline.color
-        renderer.lineWidth = 3
+        renderer.lineWidth = 5
         return renderer
     }
     
+    func mapView(_ mapView: MKMapView, viewFor annotation: MKAnnotation) -> MKAnnotationView? {
+        let annotationView = MKMarkerAnnotationView(annotation: annotation, reuseIdentifier: "custom")
+        
+        switch annotation.title {
+        case "Старт":
+            annotationView.markerTintColor = UIColor(named: "yellow")
+        case "Финиш":
+            annotationView.markerTintColor = UIColor(named: "green")
+        default:
+            break
+        }
+        return annotationView
+    }
 }
-
 

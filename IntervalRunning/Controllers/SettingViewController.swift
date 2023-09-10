@@ -95,10 +95,12 @@ class SettingViewController: UIViewController {
         let button = UIButton()
         button.setTitle("Далее", for: .normal)
         button.backgroundColor = UIColor(named: "yellow")
-        button.layer.cornerRadius = 10
+        button.layer.cornerRadius = 12
+        button.titleLabel?.font = .systemFont(ofSize: 22, weight: .bold)
         button.translatesAutoresizingMaskIntoConstraints = false
         button.addTarget(self, action: #selector(nextButtonTapped), for: .touchUpInside)
         button.isHidden = true
+        button.setShadow()
         return button
     }()
     
@@ -106,21 +108,25 @@ class SettingViewController: UIViewController {
         let button = UIButton()
         button.setTitle("Назад", for: .normal)
         button.backgroundColor = UIColor(named: "yellow")
-        button.layer.cornerRadius = 10
+        button.layer.cornerRadius = 12
+        button.titleLabel?.font = .systemFont(ofSize: 22, weight: .bold)
         button.translatesAutoresizingMaskIntoConstraints = false
         button.addTarget(self, action: #selector(backButtonTapped), for: .touchUpInside)
         button.isHidden = true
+        button.setShadow()
         return button
     }()
     
     private lazy var doneButton: UIButton = {
         let button = UIButton()
-        button.setTitle("Готово!", for: .normal)
+        button.setTitle("Готово", for: .normal)
         button.backgroundColor = UIColor(named: "yellow")
-        button.layer.cornerRadius = 10
+        button.layer.cornerRadius = 12
+        button.titleLabel?.font = .systemFont(ofSize: 22, weight: .bold)
         button.translatesAutoresizingMaskIntoConstraints = false
         button.addTarget(self, action: #selector(doneButtonTapped), for: .touchUpInside)
         button.isHidden = true
+        button.setShadow()
         return button
     }()
     

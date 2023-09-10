@@ -35,7 +35,6 @@ class NewRunViewController: UIViewController, DataTransferProtocol {
     private lazy var mapView: MKMapView = {
         let map = MKMapView()
         map.showsUserLocation = true
-        map.layer.cornerRadius = 25
         map.translatesAutoresizingMaskIntoConstraints = false
         map.tintColor = UIColor(named: "yellow")
         map.mapType = .mutedStandard
@@ -124,7 +123,7 @@ class NewRunViewController: UIViewController, DataTransferProtocol {
         let imageView = UIImageView()
         imageView.translatesAutoresizingMaskIntoConstraints = false
         imageView.image = UIImage(systemName: "speaker.slash.fill")
-        imageView.tintColor = UIColor(named: "blue")
+        imageView.tintColor = UIColor(named: "red")
         imageView.contentMode = .scaleAspectFit
         
         return imageView
@@ -150,11 +149,7 @@ class NewRunViewController: UIViewController, DataTransferProtocol {
         button.tintColor = UIColor(named: "dark")
         button.isMultipleTouchEnabled = false
         button.isHidden = true
-        let tapGestureRecognizer = UITapGestureRecognizer(target: self, action: #selector(stopButtonTapped))
-        button.addGestureRecognizer(tapGestureRecognizer)
-        let longPressRecognizer = UILongPressGestureRecognizer(target: self, action: #selector(stopButtonLongPressed))
-        longPressRecognizer.minimumPressDuration = 1
-        button.addGestureRecognizer(longPressRecognizer)
+        button.addTarget(self, action: #selector(stopButtonTapped), for: .touchUpInside)
         return button
     }()
     
@@ -204,14 +199,20 @@ class NewRunViewController: UIViewController, DataTransferProtocol {
             // Full Signal
             horizontalAccuracyImage.image = UIImage(named: "maximumSignal")
         }
-        
-        print(locationManager.location?.horizontalAccuracy ?? 0)
     }
     
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
-        navigationController?.navigationBar.isHidden = true
+//        navigationController?.navigationBar.isHidden = true
+        
         self.setPace = DataManager.shared.get(key: "Pace") as? Float ?? 0
+        
+        locationList.removeAll()
+        seconds = 0
+        distance = Measurement(value: 0, unit: UnitLength.meters)
+//        currentPace = 0
+        updateDisplay()
+        mapView.removeOverlays(mapView.overlays)
     }
     
     override func viewWillDisappear(_ animated: Bool) {
@@ -230,14 +231,14 @@ class NewRunViewController: UIViewController, DataTransferProtocol {
         view.addSubview(distanceLabel)
         view.addSubview(distanceMeasurementLabel)
         view.addSubview(settingButton)
-        view.addSubview(currentPaceLabel)
+//        view.addSubview(currentPaceLabel)
         view.addSubview(horizontalAccuracyImage)
         view.addSubview(speakerImage)
     }
     
     private func setupConstraints() {
         NSLayoutConstraint.activate([
-            timeLabel.topAnchor.constraint(equalTo: view.safeAreaLayoutGuide.topAnchor, constant: 8),
+            timeLabel.topAnchor.constraint(equalTo: view.safeAreaLayoutGuide.topAnchor, constant: 38),
             timeLabel.leadingAnchor.constraint(equalTo: view.leadingAnchor, constant: 64),
             timeLabel.trailingAnchor.constraint(equalTo: view.trailingAnchor, constant: -64),
             timeLabel.heightAnchor.constraint(equalToConstant: 40),
@@ -282,10 +283,10 @@ class NewRunViewController: UIViewController, DataTransferProtocol {
             settingButton.heightAnchor.constraint(equalToConstant: 50),
             settingButton.widthAnchor.constraint(equalToConstant: 50),
             
-            currentPaceLabel.centerYAnchor.constraint(equalTo: startButton.centerYAnchor),
-            currentPaceLabel.centerXAnchor.constraint(equalTo: view.centerXAnchor, constant: -((view.frame.width / 4) + 15)),
-            currentPaceLabel.heightAnchor.constraint(equalToConstant: 30),
-            currentPaceLabel.widthAnchor.constraint(equalToConstant: 150),
+//            currentPaceLabel.centerYAnchor.constraint(equalTo: startButton.centerYAnchor),
+//            currentPaceLabel.centerXAnchor.constraint(equalTo: view.centerXAnchor, constant: -((view.frame.width / 4) + 15)),
+//            currentPaceLabel.heightAnchor.constraint(equalToConstant: 30),
+//            currentPaceLabel.widthAnchor.constraint(equalToConstant: 150),
             
 //            horizontalAccuracyImage.leadingAnchor.constraint(equalTo: view.leadingAnchor, constant: 15),
 //            horizontalAccuracyImage.trailingAnchor.constraint(equalTo: timeLabel.leadingAnchor, constant: -15),
@@ -348,21 +349,12 @@ class NewRunViewController: UIViewController, DataTransferProtocol {
             self.eachSecond()
             
             let currentDistance = (self.distance.value - Double(segmentDistance))
-//            print(currentDistance)
             
             let currentTime = self.seconds - segmentTime
             
             let speedMagnitude = currentTime != 0 ? currentDistance / Double(currentTime) : 0
             let speed = Measurement(value: speedMagnitude, unit: UnitSpeed.metersPerSecond)
             let pace = speed.converted(to: .minutesPerKilometer).value
-            
-            print(pace)
-            
-//            print(currentTime)
-            
-//            let currentTemp = ((currentDistance) / Double(currentTime))
-            
-//            print(currentTemp)
             
             if self.distance.value > sumOfSegments {
                 sumOfSegments += lengthOfTheSegment
@@ -433,7 +425,6 @@ class NewRunViewController: UIViewController, DataTransferProtocol {
             horizontalAccuracyImage.image = UIImage(named: "maximumSignal")
         }
         
-        print(locationManager.location?.horizontalAccuracy ?? 0)
     }
     
     private func getCurrentPace() -> String {
@@ -501,6 +492,8 @@ class NewRunViewController: UIViewController, DataTransferProtocol {
         CoreDataStack.saveContext()
         
         run = newRun
+        
+        print(newRun.distance)
     }
     
     
@@ -520,18 +513,8 @@ class NewRunViewController: UIViewController, DataTransferProtocol {
         startButton.isHidden = true
         stopButton.isHidden = false
         settingButton.isEnabled = false
-    }
-    
-    @objc func stopTapped(sender: UILongPressGestureRecognizer) {
-        self.stopRun()
-        self.saveRun()
-        startButton.isHidden = false
-        stopButton.isHidden = true
-        settingButton.isEnabled = true
         
-        let vc = RunDetailsViewController()
-        vc.run = run
-        navigationController?.pushViewController(vc, animated: true)
+        self.tabBarController?.tabBar.isHidden = true
     }
     
     @objc func settingTapped() {
@@ -542,37 +525,18 @@ class NewRunViewController: UIViewController, DataTransferProtocol {
     
     @objc func stopButtonTapped(sender: UITapGestureRecognizer){
         
-        UIView.animate(withDuration: 0.2, delay: 0.0, options: UIView.AnimationOptions.curveEaseIn, animations: {
-            
-            // HERE
-            self.stopButton.transform = CGAffineTransform.identity.scaledBy(x: 1.1, y: 1.1) // Scale your image
-            
-        }) { (finished) in
-            UIView.animate(withDuration: 0.2, animations: {
-                
-                self.stopButton.transform = CGAffineTransform.identity // undo in 1 seconds
-                
-            })
-        }
-    }
-    
-    @objc func stopButtonLongPressed(sender: UILongPressGestureRecognizer) {
-        if sender.state == .began {
-            self.stopRun()
-            self.saveRun()
-            startButton.isHidden = false
-            stopButton.isHidden = true
-            settingButton.isEnabled = true
-            
-            let vc = RunDetailsViewController()
-            vc.run = run
-            navigationController?.pushViewController(vc, animated: true)
-            
-            let url = Bundle.main.url(forResource: "Вам необходимо замедлиться", withExtension: "mp3")
-            
-            player = try! AVAudioPlayer(contentsOf: url!)
-            player.play()
-        }
+        self.stopRun()
+        self.saveRun()
+        startButton.isHidden = false
+        stopButton.isHidden = true
+        settingButton.isEnabled = true
+        
+        let vc = RunDetailsViewController()
+        vc.run = run
+        vc.modalTransitionStyle = .flipHorizontal
+        vc.modalPresentationStyle = .fullScreen
+        present(vc, animated: true)
+        self.tabBarController?.tabBar.isHidden = false
     }
 }
 

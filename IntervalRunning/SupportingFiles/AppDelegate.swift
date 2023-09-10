@@ -8,6 +8,7 @@
 import UIKit
 import CoreData
 import AVFAudio
+import FirebaseCore
 
 @main
 class AppDelegate: UIResponder, UIApplicationDelegate {
@@ -27,9 +28,9 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
             print("Session is Active")
         } catch {
             print(error)
-            
-            
         }
+        
+        FirebaseApp.configure()
         return true
     }
         // MARK: UISceneSession Lifecycle
